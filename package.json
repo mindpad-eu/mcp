@@ -1,5 +1,8 @@
 {
+	"name": "@mindpad/mcp",
+	"description": "Mindpad MCP server. Save notes to your Mindpad account directly from AI assistants.",
 	"type": "module",
+	"version": "0.1.0",
 	"scripts": {
 		"build": "tsc",
 		"format": "eslint --fix --cache src && prettier --write --cache --log-level warn src",
@@ -19,7 +22,6 @@
 	},
 	"dependencies": {
 		"@modelcontextprotocol/sdk": "^1.26.0",
-		"@nekm/core": "^1.8.2",
 		"ky": "^1.14.3",
 		"zod": "^4.3.6"
 	}
