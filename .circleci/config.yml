@@ -1,0 +1,62 @@
+version: 2.1
+orbs:
+  node: circleci/node@7
+jobs:
+  deploy:
+    executor: &executor
+      name: node/default
+      resource_class: small
+    steps:
+      - checkout
+      - node/install-packages
+      - run: npm run build
+      - run:
+          name: Set version in package.json
+          command: >-
+            jq --arg ver "$CIRCLE_TAG" '.version = $ver' package.json >
+            /tmp/package.json && mv /tmp/package.json package.json
+      - run:
+          name: NPM publish
+          command: |-
+            echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > .npmrc
+            npm publish --access public --tag latest
+  lint_format:
+    executor: *executor
+    steps:
+      - checkout
+      - node/install-packages
+      - run: npx eslint --max-warnings=0 --fix src
+      - run: npx prettier --write src
+      - run: |-
+          git config user.name "CircleCI"
+          git config user.email "circleci@niklasekman.solutions"
+          git add .
+          git diff --quiet --cached || git commit -am "chore: lint and format"
+          git push --set-upstream origin $CIRCLE_BRANCH
+workflows:
+  main:
+    jobs:
+      - lint_format:
+          filters: &ignore-main
+            branches:
+              ignore: main
+      - node/test:
+          name: unit_test
+          test-results-for: jest
+          executor: *executor
+          filters: *ignore-main
+  deploy:
+    jobs:
+      - node/test:
+          name: &unit_test unit_test
+          test-results-for: jest
+          executor: *executor
+          filters: &deploy_filters
+            tags:
+              only: /^\d+\.\d+\.\d+$/
+            branches:
+              ignore: /.*/
+      - deploy:
+          requires: [*unit_test]
+          context: [npm]
+          filters: *deploy_filters
