@@ -1,6 +1,6 @@
 # mindpad mcp
 
-Save notes to your [mindpad](https://www.mindpad.eu?utm_source=github) account directly from your AI assistant.
+Save notes to your [mindpad](https://www.mindpad.eu?utm_source=github) account directly from AI assistants.
 
 ## Setup
 
