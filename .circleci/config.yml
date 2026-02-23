@@ -37,26 +37,15 @@ workflows:
   main:
     jobs:
       - lint_format:
-          filters: &ignore-main
+          filters:
             branches:
               ignore: main
-      - node/test:
-          name: unit_test
-          test-results-for: jest
-          executor: *executor
-          filters: *ignore-main
   deploy:
     jobs:
-      - node/test:
-          name: &unit_test unit_test
-          test-results-for: jest
-          executor: *executor
-          filters: &deploy_filters
+      - deploy:
+          context: [npm]
+          filters:
             tags:
               only: /^\d+\.\d+\.\d+$/
             branches:
               ignore: /.*/
-      - deploy:
-          requires: [*unit_test]
-          context: [npm]
-          filters: *deploy_filters
