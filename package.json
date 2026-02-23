@@ -1,6 +1,6 @@
 {
 	"name": "@mindpad/mcp",
-	"description": "Mindpad MCP server. Save notes to your Mindpad account directly from AI assistants.",
+	"description": "mindpad mcp server. Save notes to your mindpad account directly from AI assistants.",
 	"type": "module",
 	"version": "0.1.0",
 	"scripts": {
