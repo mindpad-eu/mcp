@@ -24,5 +24,10 @@
 		"@modelcontextprotocol/sdk": "^1.26.0",
 		"ky": "^1.14.3",
 		"zod": "^4.3.6"
-	}
+	},
+	"files": [
+		"build",
+		"src",
+		"README.md"
+	]
 }
