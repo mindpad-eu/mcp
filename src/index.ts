@@ -9,6 +9,7 @@ const api = ky.create({
 	prefixUrl: process.env.MINDPAD_API_BASE_URL ?? "https://app.mindpad.eu/api",
 	headers: {
 		Authorization: `Bearer ${process.env.MINDPAD_PAT}`,
+		"User-Agent": `mindpad-mcp/${pkg.version}`,
 	},
 });
 
