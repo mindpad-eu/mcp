@@ -2,6 +2,8 @@
 
 Save notes to your [mindpad](https://www.mindpad.eu?utm_source=github) account directly from AI assistants.
 
+[mindpad](https://www.mindpad.eu?utm_source=github) is a privacy-first, European note-taking app where notes are end-to-end encrypted on your device before they ever leave it — meaning even [mindpad](https://www.mindpad.eu?utm_source=github) can't read them. No tracking, no ads, no AI training on your content. Fully GDPR-compliant and hosted within the EU.
+
 ## Setup
 
 **1. Generate a Personal Access Token**
