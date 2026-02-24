@@ -3,6 +3,7 @@
 	"description": "mindpad mcp server. Save notes to your mindpad account directly from AI assistants.",
 	"type": "module",
 	"version": "0.1.0",
+	"bin": "build/index.js",
 	"scripts": {
 		"build": "tsc",
 		"format": "eslint --fix --cache src && prettier --write --cache --log-level warn src",
