@@ -9,7 +9,7 @@ const api = ky.create({
 	prefixUrl: process.env.MINDPAD_API_BASE_URL ?? "https://app.mindpad.eu/api",
 	headers: {
 		Authorization: `Bearer ${process.env.MINDPAD_PAT}`,
-		"User-Agent": `mindpad-mcp/${pkg.version}`,
+		"User-Agent": `mindpad-mcp-server/${pkg.version}`,
 	},
 });
 
@@ -30,7 +30,12 @@ server.registerTool(
 	{
 		description:
 			"Saves a note to the user's mindpad account. Use this when the user wants to capture, remember, or jot something down.",
-		inputSchema: { content: z.string().min(1) },
+		inputSchema: {
+			content: z
+				.string()
+				.nonempty()
+				.describe("The note content. Supports markdown."),
+		},
 	},
 	async ({ content }) => {
 		await api.post("v1/note", { json: { content } });
